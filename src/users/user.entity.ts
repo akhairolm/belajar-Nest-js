@@ -7,7 +7,6 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  PrimaryColumn,
   OneToMany,
 } from 'typeorm';
 
