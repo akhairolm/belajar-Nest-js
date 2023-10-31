@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Exclude } from 'class-transformer';
 import { Item } from '../items/item.entity';
 import {
@@ -24,6 +25,9 @@ export class User {
   @Column()
   @Exclude()
   password: string;
+
+  @Column({ default: true })
+  admin: boolean;
 
   @OneToMany(() => Item, (item) => item.user)
   items: Item[];

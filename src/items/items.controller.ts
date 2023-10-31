@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Body,
   Controller,
@@ -14,6 +15,7 @@ import { User } from '../users/user.entity';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { ItemDto } from './dto/item.dto';
 import { ApprovedItemDto } from './dto/approve-item.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @Controller('items')
 export class ItemsController {
@@ -26,6 +28,7 @@ export class ItemsController {
   }
 
   @Patch('/:id')
+  @UseGuards(AdminGuard)
   approveItem(@Param('id') id: string, @Body() body: ApprovedItemDto) {
     return this.itemService.approveItem(parseInt(id), body.approved);
   }
