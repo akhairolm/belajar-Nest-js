@@ -2,9 +2,11 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { createItemDto } from './dto/create-item.dto';
@@ -16,10 +18,16 @@ import { Serialize } from '../interceptors/serialize.interceptor';
 import { ItemDto } from './dto/item.dto';
 import { ApprovedItemDto } from './dto/approve-item.dto';
 import { AdminGuard } from '../guards/admin.guard';
+import { QueryItemDto } from './dto/query-item.dto';
 
 @Controller('items')
 export class ItemsController {
   constructor(private itemService: ItemsService) {}
+  @Get()
+  getAllItems(@Query() query: QueryItemDto) {
+    return this.itemService.getAllItems(query);
+  }
+
   @Post()
   @UseGuards(AuthGuard)
   @Serialize(ItemDto)
